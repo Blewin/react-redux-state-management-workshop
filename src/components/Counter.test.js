@@ -13,6 +13,15 @@ describe('Counter', () => {
    */
   let instance;
 
+  /**
+   * @type {jest.Mock}
+   */
+  let onIncrement;
+  /**
+   * @type {jest.Mock}
+   */
+  let onDecrement;
+
   function getValueSpan() {
     return instance.find((node) => node.props.className === 'counter__value');
   }
@@ -30,7 +39,12 @@ describe('Counter', () => {
   }
 
   beforeEach(() => {
-    testRenderer = TestRenderer.create(<Counter />);
+    onIncrement = jest.fn();
+    onDecrement = jest.fn();
+
+    testRenderer = TestRenderer.create(
+      <Counter value={0} onIncrement={onIncrement} onDecrement={onDecrement} />,
+    );
     instance = testRenderer.root;
   });
 
@@ -52,41 +66,35 @@ describe('Counter', () => {
     expect(span.children[0]).toEqual('0');
   });
 
-  it('should display -1 after clicking the minus button', () => {
-    const span = getValueSpan();
+  it('should call the onDecrement callback when clicking the minus button', () => {
     const minusButton = getMinusButton();
 
     minusButton.props.onClick();
 
-    expect(span.children[0]).toEqual('-1');
+    expect(onDecrement).toHaveBeenCalled();
   });
 
-  it('should display -2 after clicking the minus button twice', () => {
-    const span = getValueSpan();
+  it('should not call the onIncrement callback when clicking the minus button', () => {
     const minusButton = getMinusButton();
 
     minusButton.props.onClick();
-    minusButton.props.onClick();
 
-    expect(span.children[0]).toEqual('-2');
+    expect(onIncrement).not.toHaveBeenCalled();
   });
 
-  it('should display 1 after clicking the plus button', () => {
-    const span = getValueSpan();
+  it('should call the onIncrement callback when clicking the plus button', () => {
     const plusButton = getPlusButton();
 
     plusButton.props.onClick();
 
-    expect(span.children[0]).toEqual('1');
+    expect(onIncrement).toHaveBeenCalled();
   });
 
-  it('should display 2 after clicking the plus button twice', () => {
-    const span = getValueSpan();
+  it('should not call the onDecrement callback when clicking the plus button', () => {
     const plusButton = getPlusButton();
 
     plusButton.props.onClick();
-    plusButton.props.onClick();
 
-    expect(span.children[0]).toEqual('2');
+    expect(onDecrement).not.toHaveBeenCalled();
   });
 });

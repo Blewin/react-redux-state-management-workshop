@@ -3,12 +3,8 @@ import React, { Component } from 'react';
 import './Counter.css';
 
 export default class Counter extends Component {
-  state = {
-    value: 0,
-  };
-
   render() {
-    const { value } = this.state;
+    const { value } = this.props;
 
     return (
       <div className="counter">
@@ -26,14 +22,10 @@ export default class Counter extends Component {
   }
 
   _onMinusClicked = () => {
-    this.setState({
-      value: this.state.value - 1,
-    });
+    // TODO: call this.props.onDecrement with a correct argument
   };
 
   _onPlusClicked = () => {
-    this.setState({
-      value: this.state.value + 1,
-    });
+    // TODO: call this.props.onIncrement with a correct argument
   };
 }
