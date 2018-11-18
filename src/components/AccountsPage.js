@@ -10,12 +10,17 @@ import AccountsPanel from './AccountsPanel';
  * i.e. prop-drilling
  */
 export default function AccountsPage(props) {
-  // TODO: pass down the props
-
   return (
     <div>
-      <BankStats />
-      <AccountsPanel />
+      <BankStats
+        balances={props.balances}
+        openNewAccount={props.openNewAccount}
+      />
+      <AccountsPanel
+        balances={props.balances}
+        incrementBalance={props.incrementBalance}
+        decrementBalance={props.decrementBalance}
+      />
     </div>
   );
 }
