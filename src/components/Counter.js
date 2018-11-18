@@ -26,10 +26,14 @@ export default class Counter extends Component {
   }
 
   _onMinusClicked = () => {
-    // TODO: complete
+    this.setState({
+      value: this.state.value - 1,
+    });
   };
 
   _onPlusClicked = () => {
-    // TODO: complete
+    this.setState({
+      value: this.state.value + 1,
+    });
   };
 }
