@@ -4,6 +4,12 @@
   border: solid 1px #e1e1e1;
 }
 
+.counter__value {
+  display: inline-block;
+  width: 15px;
+  text-align: center;
+}
+
 .counter__button {
   margin: 0 5px;
 }
