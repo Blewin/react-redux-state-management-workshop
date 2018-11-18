@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 
 import './App.css';
+import Counter from './components/Counter';
 
 class App extends Component {
   render() {
     return (
       <div className="app">
         <h1>React state management workshop</h1>
-        Edit <code>src/App.js</code> to see the changes.
+        <h2>Single Counter</h2>
+
+        <div className="content">
+          <Counter />
+        </div>
       </div>
     );
   }

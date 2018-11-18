@@ -1,0 +1,9 @@
+.counter {
+  padding: 1em;
+  margin: 5px;
+  border: solid 1px #e1e1e1;
+}
+
+.counter__button {
+  margin: 0 5px;
+}
