@@ -1,8 +1,9 @@
 import React from 'react';
 
-// NOTE: this file does not have to be modified
+import AccountsContext from '../accounts-context';
 
-export default function BankStats({ balances, openNewAccount }) {
+export default function BankStats() {
+  // TODO: access data with AccountsContext.Consumer
   return (
     <div>
       <p>{balances.length} open accounts.</p>

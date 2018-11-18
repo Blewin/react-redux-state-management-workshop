@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import AccountsPage from './components/AccountsPage';
+import AccountsContext from './accounts-context';
 
 class App extends Component {
   state = {
@@ -10,18 +11,21 @@ class App extends Component {
 
   render() {
     const { balances } = this.state;
+    const accountsContextValue = {
+      balances,
+      openNewAccount: this._openNewAccount,
+      incrementBalance: this._incrementBalance,
+      decrementBalance: this._decrementBalance,
+    };
 
     return (
       <div className="app">
         <h1>React state management workshop</h1>
-        <h2>Multiple accounts with prop-drilling</h2>
+        <h2>Multiple accounts using React Context</h2>
 
-        <AccountsPage
-          balances={balances}
-          openNewAccount={this._openNewAccount}
-          incrementBalance={this._incrementBalance}
-          decrementBalance={this._decrementBalance}
-        />
+        <AccountsContext.Provider value={accountsContextValue}>
+          <AccountsPage />
+        </AccountsContext.Provider>
       </div>
     );
   }

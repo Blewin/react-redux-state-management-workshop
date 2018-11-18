@@ -2,6 +2,7 @@ import React from 'react';
 import TestRenderer from 'react-test-renderer';
 
 import AccountsPage from './AccountsPage';
+import AccountsContext from '../accounts-context';
 
 describe('AccountsPage', () => {
   /**
@@ -32,12 +33,16 @@ describe('AccountsPage', () => {
     decrementBalance = jest.fn();
 
     testRenderer = TestRenderer.create(
-      <AccountsPage
-        balances={[0]}
-        openNewAccount={openNewAccount}
-        incrementBalance={incrementBalance}
-        decrementBalance={decrementBalance}
-      />,
+      <AccountsContext.Provider
+        value={{
+          balances: [0],
+          openNewAccount,
+          incrementBalance,
+          decrementBalance,
+        }}
+      >
+        <AccountsPage />
+      </AccountsContext.Provider>,
     );
     instance = testRenderer.root;
   });

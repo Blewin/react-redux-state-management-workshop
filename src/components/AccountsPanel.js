@@ -1,14 +1,11 @@
 import React from 'react';
 
+import AccountsContext from '../accounts-context';
+
 import Counter from './Counter';
 
-// NOTE: this file does not have to be modified
-
-export default function AccountsPanel({
-  balances,
-  incrementBalance,
-  decrementBalance,
-}) {
+export default function AccountsPanel() {
+  // TODO: access data with AccountsContext.Consumer
   return (
     <div className="content">
       {balances.map((balance, index) => (
