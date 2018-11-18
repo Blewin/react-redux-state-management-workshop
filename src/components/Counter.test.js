@@ -29,10 +29,6 @@ describe('Counter', () => {
     );
   }
 
-  function rerender() {
-    testRenderer.update(<Counter />);
-  }
-
   beforeEach(() => {
     testRenderer = TestRenderer.create(<Counter />);
     instance = testRenderer.root;
@@ -61,7 +57,6 @@ describe('Counter', () => {
     const minusButton = getMinusButton();
 
     minusButton.props.onClick();
-    rerender();
 
     expect(span.children[0]).toEqual('-1');
   });
@@ -71,9 +66,7 @@ describe('Counter', () => {
     const minusButton = getMinusButton();
 
     minusButton.props.onClick();
-    rerender();
     minusButton.props.onClick();
-    rerender();
 
     expect(span.children[0]).toEqual('-2');
   });
@@ -83,7 +76,6 @@ describe('Counter', () => {
     const plusButton = getPlusButton();
 
     plusButton.props.onClick();
-    rerender();
 
     expect(span.children[0]).toEqual('1');
   });
@@ -93,9 +85,7 @@ describe('Counter', () => {
     const plusButton = getPlusButton();
 
     plusButton.props.onClick();
-    rerender();
     plusButton.props.onClick();
-    rerender();
 
     expect(span.children[0]).toEqual('2');
   });
