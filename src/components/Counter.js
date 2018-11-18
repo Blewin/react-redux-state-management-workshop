@@ -22,10 +22,10 @@ export default class Counter extends Component {
   }
 
   _onMinusClicked = () => {
-    // TODO: call this.props.onDecrement with a correct argument
+    this.props.onDecrement();
   };
 
   _onPlusClicked = () => {
-    // TODO: call this.props.onIncrement with a correct argument
+    this.props.onIncrement();
   };
 }

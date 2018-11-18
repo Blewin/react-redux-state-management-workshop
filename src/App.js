@@ -38,16 +38,27 @@ class App extends Component {
   }
 
   _onOpenNewAccountClicked = () => {
-    // TODO: complete
+    this.setState({
+      balances: [...this.state.balances, 0],
+    });
   };
 
-  // QUESTION: why is _onIncrementBalance a function that returns a function?
   _onIncrementBalance = (index) => () => {
-    // TODO: complete
+    const balancesCopy = this.state.balances.slice(0);
+    balancesCopy[index]++;
+
+    this.setState({
+      balances: balancesCopy,
+    });
   };
 
   _onDecrementBalance = (index) => () => {
-    // TODO:
+    const balancesCopy = this.state.balances.slice(0);
+    balancesCopy[index]--;
+
+    this.setState({
+      balances: balancesCopy,
+    });
   };
 }
 
