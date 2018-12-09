@@ -1,8 +1,8 @@
 import React from 'react';
 
-import AccountsContext from '../accounts-context';
-
 export default function BankStats() {
+  return <div> Bank stats -> Not yet implemented </div>;
+  /*
   return (
     <AccountsContext.Consumer>
       {({ balances, openNewAccount }) => (
@@ -15,5 +15,5 @@ export default function BankStats() {
         </div>
       )}
     </AccountsContext.Consumer>
-  );
+  );*/
 }

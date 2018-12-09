@@ -1,24 +1,22 @@
 import React from 'react';
+import { connect } from "react-redux";
 
-import AccountsContext from '../accounts-context';
+import { ConnectedCounter } from './Counter';
 
-import Counter from './Counter';
-
-export default function AccountsPanel() {
+export function AccountsPanel(props) {
   return (
     <div className="content">
-      <AccountsContext.Consumer>
-        {({ balances, incrementBalance, decrementBalance }) =>
-          balances.map((balance, index) => (
-            <Counter
-              key={index}
-              value={balance}
-              onIncrement={incrementBalance(index)}
-              onDecrement={decrementBalance(index)}
-            />
-          ))
-        }
-      </AccountsContext.Consumer>
+        {Object.keys(props.balances).map((userId) => (
+            <ConnectedCounter userId={userId} key={userId}/>
+          ))}
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    balances: state.accounts,
+  }
+}
+
+export default connect(mapStateToProps)(AccountsPanel);

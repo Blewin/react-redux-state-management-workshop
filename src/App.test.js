@@ -2,6 +2,8 @@ import React from 'react';
 import TestRenderer from 'react-test-renderer';
 
 import App from './App';
+import { Provider } from "react-redux";
+import { store } from './store';
 
 describe('App', () => {
   /**
@@ -14,7 +16,10 @@ describe('App', () => {
   let instance;
 
   beforeEach(() => {
-    testRenderer = TestRenderer.create(<App />);
+    testRenderer = TestRenderer.create(
+      <Provider store={store}>
+        <App />
+      </Provider>);
     instance = testRenderer.root;
   });
 

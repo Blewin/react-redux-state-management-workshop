@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 
 import './Counter.css';
 
@@ -29,3 +30,18 @@ export default class Counter extends Component {
     this.props.onIncrement();
   };
 }
+
+function mapStateToProps(state, props) {
+  return {
+    value: state.accounts[props.userId],
+  }
+}
+
+function mapDispatchToProps(dispatch, props) {
+  return {
+    onIncrement: () => dispatch({type: 'INCREMENT', id: props.userId}),
+    onDecrement: () => dispatch({type: 'DECREMENT', id: props.userId}),
+  }
+}
+
+export const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
