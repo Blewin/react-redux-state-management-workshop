@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-export function BankStats() {
-  return <div> Bank stats -> Not yet implemented </div>;
+export function BankStats(props) {
+  return <div>
+    <button onClick={props.openNewAccount} className="new-account-button">
+      Open new account
+    </button>
+  </div>;
   /*
   return (
     <AccountsContext.Consumer>
@@ -19,4 +23,10 @@ export function BankStats() {
   );*/
 }
 
-export default connect(null, null)(BankStats)
+export function mapDispatchToProps(dispatch) {
+  return {
+    openNewAccount: () => dispatch({type: 'CREATE'}),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(BankStats);
