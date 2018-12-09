@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from "react-redux";
 
-export default function BankStats() {
+export function BankStats() {
   return <div> Bank stats -> Not yet implemented </div>;
   /*
   return (
@@ -17,3 +18,5 @@ export default function BankStats() {
     </AccountsContext.Consumer>
   );*/
 }
+
+export default connect(null, null)(BankStats)
