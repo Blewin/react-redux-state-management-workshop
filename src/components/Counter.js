@@ -18,6 +18,10 @@ export default class Counter extends Component {
         <button onClick={this._onPlusClicked} className="counter__button">
           +
         </button>
+
+        <button onClick={this._onDeleteClicked} className="counter__button">
+          DELETE
+        </button>
       </div>
     );
   }
@@ -28,6 +32,10 @@ export default class Counter extends Component {
 
   _onPlusClicked = () => {
     this.props.onIncrement();
+  };
+
+  _onDeleteClicked = () => {
+    this.props.onDelete();
   };
 }
 
@@ -41,6 +49,7 @@ function mapDispatchToProps(dispatch, props) {
   return {
     onIncrement: () => dispatch({type: 'INCREMENT', id: props.userId}),
     onDecrement: () => dispatch({type: 'DECREMENT', id: props.userId}),
+    onDelete: () => dispatch({type: 'DELETE', id: props.userId}),
   }
 }
 

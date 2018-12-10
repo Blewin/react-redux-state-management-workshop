@@ -25,6 +25,14 @@ export default function accounts(state = INITIAL_STATE, action) {
         [action.id]: state[action.id] - 1,
       };
 
+    case 'DELETE':
+      const {
+        [action.id]: _,
+        ...newState
+      } = state;
+
+      return newState;
+
     // initial state
     default:
       return state;
