@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 export function BankStats(props) {
   return <div>
+    <p className="all-accounts-counter">{props.balances ? Object.keys(props.balances).length : 0} accounts open.</p>
     <button onClick={props.openNewAccount} className="new-account-button">
       Open new account
     </button>
@@ -29,4 +30,9 @@ export function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(BankStats);
+function mapStateToProps(state) {
+  return {
+    balances: state.accounts,
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(BankStats);
