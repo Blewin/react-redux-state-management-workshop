@@ -21,6 +21,10 @@ describe('Counter', () => {
    * @type {jest.Mock}
    */
   let onDecrement;
+  /**
+   * @type {jest.Mock}
+   */
+  let onDelete;
 
   function getValueSpan() {
     return instance.find((node) => node.props.className === 'counter__value');
@@ -38,14 +42,37 @@ describe('Counter', () => {
     );
   }
 
+  function getDeleteButton() {
+    return instance.find(
+      (node) => node.type === 'button' && node.children[0] === 'DELETE',
+    );
+  }
+
   beforeEach(() => {
     onIncrement = jest.fn();
     onDecrement = jest.fn();
+    onDelete = jest.fn();
 
     testRenderer = TestRenderer.create(
-      <Counter value={0} onIncrement={onIncrement} onDecrement={onDecrement} />,
+      <Counter value={0} onIncrement={onIncrement} onDecrement={onDecrement} onDelete={onDelete}/>,
     );
     instance = testRenderer.root;
+  });
+
+  describe('delete button', () => {
+    it('should exist', () => {
+      expect(getDeleteButton()).toBeDefined();
+    });
+
+    it('should call only the correct callback', () => {
+      const deleteButton = getDeleteButton();
+
+      deleteButton.props.onClick();
+
+      expect(onDelete).toHaveBeenCalled();
+      expect(onDecrement).not.toHaveBeenCalled();
+      expect(onIncrement).not.toHaveBeenCalled();
+    })
   });
 
   it('should contain a span with class counter__value', () => {
