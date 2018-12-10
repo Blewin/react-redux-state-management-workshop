@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import ConnectedBankStats, { BankStats } from './BankStats';
 import { store } from '../store';
 
+
 describe('BankStats', () => {
   describe('connected ', () => {
     it('renders without crashing', () => {
@@ -39,26 +40,69 @@ describe('BankStats', () => {
       );
     }
 
-    beforeEach(() => {
-      openNewAccount = jest.fn();
+    function getAccountsIndicator() {
+      return instance.find((node) => node.props.className === 'all-accounts-counter');
+    }
 
-      testRenderer = TestRenderer.create(
-        <BankStats openNewAccount={openNewAccount} />,
-      );
+    describe('bank stats with simple balances', () => {
+      beforeEach(() => {
+        openNewAccount = jest.fn();
 
-      instance = testRenderer.root;
+        testRenderer = TestRenderer.create(
+          <BankStats openNewAccount={openNewAccount} length={3}/>,
+        );
+
+        instance = testRenderer.root;
+      });
+
+      describe('new-account button', () => {
+        it('should have class new-account-button', () => {
+          expect(getCreateAccountButton()).toBeDefined();
+        });
+
+        it('should call the openNewAccount callback when clicking', () => {
+          const openNewAccountButton = getCreateAccountButton();
+
+          openNewAccountButton.props.onClick();
+
+          expect(openNewAccount).toHaveBeenCalled();
+        });
+      });
+
+      describe('accounts indicator', () => {
+        it('should have class all-accounts-counter', () => {
+          expect(getAccountsIndicator()).toBeDefined();
+        });
+
+        it('should display correct number of elements', () => {
+          expect(getAccountsIndicator().props.children.join('')).toEqual('3 accounts open.');
+        });
+
+      })
     });
 
-    it('should contain a button with class new-account-button', () => {
-      expect(getCreateAccountButton()).toBeDefined();
+    describe('bank stats with empty balances', () => {
+      beforeEach(() => {
+        openNewAccount = jest.fn();
+
+        testRenderer = TestRenderer.create(
+          <BankStats openNewAccount={openNewAccount} length={0}/>,
+        );
+
+        instance = testRenderer.root;
+      });
+
+      describe('accounts indicator', () => {
+        it('should have class all-accounts-counter', () => {
+          expect(getAccountsIndicator()).toBeDefined();
+        });
+
+        it('should display correct number of elements', () => {
+          expect(getAccountsIndicator().props.children.join('')).toEqual('0 accounts open.');
+        });
+
+      })
     });
 
-    it('should call the openNewAccount callback when clicking the minus button', () => {
-      const openNewAccountButton = getCreateAccountButton();
-
-      openNewAccountButton.props.onClick();
-
-      expect(openNewAccount).toHaveBeenCalled();
-    });
   })
 });
