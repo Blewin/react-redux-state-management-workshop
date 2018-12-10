@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 export function BankStats(props) {
   return <div>
+    <p className="all-accounts-counter">{props.length} accounts open.</p>
     <button onClick={props.openNewAccount} className="new-account-button">
       Open new account
     </button>
@@ -29,4 +30,10 @@ export function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(BankStats);
+export function mapStateToProps(state) {
+  return {
+    length: state.accounts ? Object.keys(state.accounts).length : 0,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BankStats);
